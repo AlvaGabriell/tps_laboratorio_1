@@ -12,8 +12,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "utn.h"
-char validarSalida();
-int validarEntradas (int flag1,int flag2);
 int main(void) {
 	setbuf(stdout,NULL);
 	char respuesta='n';
@@ -49,12 +47,10 @@ int main(void) {
 
 	while(respuesta =='n')
 	{
-		switch(mostrarMenuP(&costoComida,&costoHospedaje,&costoTransporte,&contadorArc,&contadorDef,&contadorMed,&contadorDel))
+		switch(mostrarMenuP(costoComida,costoHospedaje,costoTransporte,contadorArc,contadorDef,contadorMed,contadorDel))
 		{
 			case 1:
-				costoComida=ingresarEntero("Ingrese costo de comida ");
-				costoHospedaje=ingresarEntero("Ingrese costo de hospedaje ");
-				costoTransporte=ingresarEntero("Ingrese costo de transporte");
+				cargarCostosMantenimiento(&costoComida, &costoHospedaje, &costoTransporte);
 				flag1=1;
 				break;
 			case 2:
@@ -113,6 +109,7 @@ int main(void) {
 						cargarDatos(&acumTotalCoste, costoHospedaje, costoComida, costoTransporte, &sumaJugadores, conme, uefa, concaf, afc, ofc, caf, &promConme,
 											&promUefa, &promConc, &promAfc, &promOfc, &promCaf, contadorArc, contadorDef, contadorMed, contadorDel,
 											&mayorProm,&impuestoAlbertito);
+						flag3=1;
 					}
 				break;
 			case 4:
@@ -121,9 +118,8 @@ int main(void) {
 					mostrarDatos(promConme, promUefa, promConc, promAfc, promOfc, promCaf, mayorProm, impuestoAlbertito, acumTotalCoste);
 				}else
 					{
-						printf("\nNo hay datos ingresados...");
+						printf("\nDebes cargar los datos antes...");
 					}
-
 				break;
 			case 5:
 				respuesta=validarSalida();
